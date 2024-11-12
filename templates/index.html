@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Flight Delay Prediction</title>
+
+    <!-- Google font -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">-->
+
+    <!-- Bootstrap -->
+    <!-- <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" /> -->
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="static\css\style.css" />
+    
+    <style>
+    
+    
+    /* #booking {
+        font-family: 'Lato', sans-serif;
+        background-color: #000000;*/ /* Set a blue background color */
+        /*background-size: cover;
+        background-position: center;
+        color: #ffffff;
+    } 
+    */
+    
+
+    </style>
+    <!--<img src="{{url_for('static', filename='background.png')}}" />-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+    <!--<div class="col-md-4">-->
+        <div class="booking-cta">
+            <h1>Flight Delay Prediction</h1>
+            <p></p>
+            <div class="container-1">
+                <!-- {{ prediction_text }} -->
+                {% if prediction_text == 0 %}
+                <h2>The flight is not delayed</h2>
+
+                {% elif prediction_text == 1 %}
+                <h2>The flight is delayed</h2>
+                {% endif %}
+
+            </div>
+        </div>
+    <!--</div>-->
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    
+
+                    <div class="col-md-7 col-md-offset-1">
+                        <div class="booking-form">
+                            <form action={{ url_for("predict") }} method="post">
+                               
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <span class="form-label">Year</span>
+                                                <input type="text" class="form-control" name="year" placeholder="Enter year" required="true">
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    
+                                    
+                                    <!Year>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <span class="form-label">Month</span>
+                                                <input type="text" class="form-control" name="month" placeholder="Enter month" required="true">
+                                                <span class="select-arrow"></span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <!Month>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <span class="form-label">Date</span>
+                                                <input type="text" class="form-control" name="day" placeholder="Enter date" required="true">
+                                                    <span class="select-arrow"></span>
+                                                </div>
+                                            </div>
+                                            <! Date>
+                                            <br>
+
+                                </div>
+                                <!--Year,Month,Date end-->
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Select an Airline</span>
+                                            <!-- <input class="form-control" type="date" required> -->
+                                            <select class="form-control" name="carrier">
+                                                <option value="UA">IndiGo</option>
+                                                <option value="AA">Air India</option>
+                                                <option value="US">Jet Airways</option>
+                                                <option value="F9">SpiceJet</option>
+                                                <option value="B6">Multiple carriers</option>
+                                                <option value="OO">GoAir</option>
+                                                <option value="AS">Vistara</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!Airline>
+                                    
+                                </div>
+                                <!--Airline end-->
+                                <br>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Flying from</span>
+                                            <!--<input class="form-control" type="text" placeholder="City or airport">-->
+                                            <select class="form-control" name="origin">
+                                                <option value="EWR">Banglore</option>
+                                                <option value="JFK">Kolkata</option>
+                                                <option value="LGA">Delhi</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!Flying from>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="form-label">Flying to</span>
+                                                <!-- <input class="form-control" type="text" placeholder="City or airport"> -->
+                                                <select class="form-control" name="dest">
+                                                    <option value="ATL">New Delhi</option>
+                                                    <option value="ORD">Banglore</option>
+                                                    <option value="LAX">Cochin</option>
+                                                    <option value="BOS">Kolkata</option>
+                                                    <option value="MCO">Hyderabad</option>
+                                                    <option value="CLT">Delhi</option>
+                                                   
+                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <!Flying to>
+
+                                </div>
+                                <!--Flying to,from end-->
+
+                                <div class="form-btn">
+                                    <button class="submit-btn">Predict</button>
+                                </div>
+                                <!Button>
+                                <br>
+
+                            </form>
+                            <!--Form end-->
+
+                        </div>
+                        <!Booking form>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
